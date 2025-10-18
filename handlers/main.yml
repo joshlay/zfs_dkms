@@ -1,0 +1,8 @@
+---
+# handlers file for zfs_dkms
+
+- name: Reboot into new Kernel
+  listen: zfs_dkms_reboot
+  ansible.builtin.reboot:
+    reboot_timeout: "{{ zfs_dkms_timeout }}"  # default 3600
+  become: true

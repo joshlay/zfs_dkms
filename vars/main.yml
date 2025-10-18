@@ -1,0 +1,45 @@
+---
+# vars file for zfs_dkms
+
+zfs_dkms_arc:
+  min: "{{ (ansible_memory_mb['real']['total'] * zfs_dkms_arc_pct_min / 100 * 1024 * 1024) | round | int }}"
+  max: "{{ (ansible_memory_mb['real']['total'] * zfs_dkms_arc_pct_max / 100 * 1024 * 1024) | round | int }}"
+
+zfs_dkms_deb_backports:  # ensure consistency between Debian releases. source(s) not required on Ubuntu, provided by 'universe'
+  bookworm:  # '...backports-sloppy' would get Debian testing ('forky'), instead: want Trixie backports [to 12.x]
+    - "deb http://deb.debian.org/debian bookworm-backports main contrib"
+    - "deb-src http://deb.debian.org/debian bookworm-backports main contrib"
+
+zfs_dkms_pkgs:
+  pre:  # (ansible_distribution | lower); packages wanted *before* trying to build ZFS
+    debian:
+      - dpkg-dev
+      - linux-headers-{{ ansible_kernel }}
+    ubuntu: []
+    elcommon: &elcommonpre
+      - kernel-headers
+      - kernel-devel
+      - kernel-devel-matched
+      - epel-release
+      - "https://zfsonlinux.org/epel/zfs-release-2-8.el{{ ansible_distribution_major_version }}.noarch.rpm"
+    fedora:
+      - kernel-headers
+      - kernel-devel
+      - kernel-devel-matched
+      - "https://zfsonlinux.org/fedora/zfs-release-2-8.fc{{ ansible_distribution_major_version }}.noarch.rpm"
+    almalinux: *elcommonpre
+    rocky: *elcommonpre
+    redhat:
+      - https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
+  main:  # the star of the show: ZFS transaction
+    debian:
+      - zfs-dkms
+      - zfsutils-linux
+    ubuntu:
+      - zfsutils-linux
+    elcommon: &elcommonmain
+      - zfs
+    fedora: *elcommonmain
+    almalinux: *elcommonmain
+    rocky: *elcommonmain
+    redhat: *elcommonmain

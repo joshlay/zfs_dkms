@@ -1,0 +1,7 @@
+---
+# defaults file for zfs_dkms
+#
+
+zfs_dkms_timeout: 3600  # EL-based hosts are rebooted to ensure the module is available/built; skipped if present/Debian-based
+zfs_dkms_arc_pct_min: 0
+zfs_dkms_arc_pct_max: 16

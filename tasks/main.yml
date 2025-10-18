@@ -1,0 +1,99 @@
+---
+# tasks file for zfs_dkms
+#
+# NOTE: limited EL8 testing/coverage, ansible-core 2.17+ lacks support for Python 3.6
+#                                  [managing Python releases considered out of scope]
+
+- name: Package Facts
+  ansible.builtin.package_facts: { manager: auto }
+
+- name: Look for module
+  ansible.builtin.stat: { path: /sys/module/zfs }
+  register: zfs_dkms_dir
+
+- name: Debian/Apt Tasks
+  when: ansible_os_family == 'Debian'
+  block:
+    - name: Apt Backport Sources | {{ ansible_distribution_release }}
+      loop: "{{ (zfs_dkms_deb_backports[ansible_distribution_release | lower]) | default([]) }}"
+      loop_control: { loop_var: repo }
+      become: true
+      ansible.builtin.apt_repository: { repo: "{{ repo }}", filename: "{{ ansible_distribution_release }}-backports", state: present }
+
+    - name: Pin ZFS to Backports (Debian)
+      when:
+        - zfs_dkms_deb_backports[ansible_distribution_release | lower] is defined
+        - zfs_dkms_deb_backports[ansible_distribution_release | lower] | length > 0
+      ansible.builtin.copy:
+        dest: /etc/apt/preferences.d/90_zfs
+        mode: '0644'
+        owner: root
+        group: root
+        content: |
+          Package: src:zfs-linux
+          Pin: release n={{ ansible_distribution_release }}-backports
+          Pin-Priority: 990
+      become: true
+
+- name: Handle CRB (Code Ready Builder) on RHEL-proper
+  when: ansible_distribution == 'RedHat'
+  community.general.rhsm_repository:
+    name: codeready-builder-for-rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}-rpms
+    state: enabled
+  become: true
+
+- name: Handle PowerTools (EL8) or CRB (EL9) on RHEL/Fedora derivatives
+  when: (ansible_os_family == 'RedHat') and (ansible_distribution not in ['RedHat', 'Fedora'])
+  community.general.dnf_config_manager: { name: "{{ 'powertools' if (ansible_distribution_major_version | int == 8) else 'crb' }}", state: enabled }
+  become: true
+
+- name: Kernel/Reboot tasks  # skip potential disruption (reboot) if primary goal is achieved: ZFS loaded
+  when: (ansible_os_family == 'RedHat') and (zfs_dkms_dir.stat.islnk is not defined)
+  block:  # Debian/Ubuntu are generous w/ kernel headers; EL/derivatives tend to host exactly three rotating kernels
+    - name: Ensure DNF/Yum utils (RHEL/Fedora+derivatives)
+      ansible.builtin.package: { name: yum-utils, state: present }
+      become: true
+
+    - name: Check prior reboot necessity with 'needs-restarting' (RHEL/Fedora+derivatives)  # reboot in case cloud-init/etc happened to update, ensures headers
+      ansible.builtin.command: needs-restarting -r
+      register: zfs_dkms_needs_restarting
+      changed_when: zfs_dkms_needs_restarting.rc > 0
+      failed_when: zfs_dkms_needs_restarting.stderr_lines | length > 0  # skip rc check [non-zero indicates reboot requirement]; assume logs are legitimate
+      notify: zfs_dkms_reboot
+      become: true
+
+    - name: Update Kernel (RHEL/Fedora+derivatives)  # allows DKMS to build, headers for the kernel [in the image] are likely no longer mirrored
+      notify: zfs_dkms_reboot
+      ansible.builtin.package: { name: kernel-core, state: latest, update_cache: true, update_only: true }  # 'update_only' for lint, surely already installed
+      become: true
+
+- name: Flush Handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Packages (build prep, [package-provided] repos)
+  ansible.builtin.package:
+    name: "{{ zfs_dkms_pkgs.pre[ansible_distribution | lower] }}"
+    state: present
+    update_cache: "{{ true if ansible_os_family in ['Debian', 'RedHat'] }}"  # supported by Apt/DNF modules
+    cache_valid_time: "{{ 3600 if ansible_os_family == 'Debian' else omit }}"  # idempotence/speed, Apt-specific
+    disable_gpg_check: "{{ true if ansible_os_family == 'RedHat' else omit }}"  # signature+repo is installed from URL [with SSL/TLS]
+  become: true
+
+- name: Remove conflicting 'zfs-fuse'  # most likely to appear w/ Fedora, requirement satisfied by real ZFS; placed before immediately install
+  ansible.builtin.command: rpm -e --nodeps zfs-fuse  # noqa: command-instead-of-module (lack coverage)
+  when: "'zfs-fuse' in ansible_facts.packages"
+  changed_when: true  # lint: assume on return, 'when' checks requirement
+  become: true
+
+- name: Packages (main)
+  ansible.builtin.package: { name: "{{ zfs_dkms_pkgs.main[ansible_distribution | lower] }}", state: present }
+  become: true
+
+- name: Protect ZFS/Kernel (Fedora)
+  ansible.builtin.copy: { dest: /etc/dnf/protected.d/zfs.conf, content: 'zfs', owner: root, group: root, mode: '0644' }
+  when: ansible_distribution == 'Fedora'
+  become: true
+
+- name: Load/persist Module, ensure ARC limits
+  community.general.modprobe: { name: zfs, persistent: present, params: "zfs_arc_min={{ zfs_dkms_arc['min'] }} zfs_arc_max={{ zfs_dkms_arc['max'] }}" }
+  become: true

@@ -1,0 +1,28 @@
+---
+argument_specs:
+  # roles/zfs_dkms/tasks/main.yml entry point
+  main:
+    short_description: Entrypoint for the 'zfs_dkms' role
+    description:
+      - ZFS on Linux
+    author:
+      - Josh Lay
+    options:
+      zfs_dkms_timeout:
+        type: "int"
+        required: false
+        default: 3600
+        description:
+          - "How long to wait when rebooting RHEL/derivatives for kernel updates [and current headers]"
+      zfs_dkms_arc_pct_min:
+        type: "int"
+        required: false
+        default: 0
+        description:
+          - "Minimum physical memory (%) allowed for ARC usage"
+      zfs_dkms_arc_pct_max:
+        type: "int"
+        required: false
+        default: 16
+        description:
+          - "Max physical memory (%) allowed for ARC usage"
