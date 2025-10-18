@@ -14,7 +14,7 @@ None.
 Role Variables
 --------------
 
-| Variable | Description | Default _(Role)_ | Default _(Kernel/Upstream)_ |
+| Variable | Description | Role Default | Upstream Default |
 |----------|:-----------:|--------:|--------:|
 | `zfs_dkms_arc_pct_min` | Minimum physical memory (%) allowed for ARC usage | `0` | `0` |
 | `zfs_dkms_arc_pct_max` | Max physical memory (%) allowed for ARC usage | `16` | `0` |
