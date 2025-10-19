@@ -6,6 +6,8 @@ on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master
+  paths:
+    - '**/*.yml'
   schedule:
     - cron: "20 4 * * 0"
 
@@ -22,6 +24,8 @@ jobs:
           cache: 'pip'
 
       - run: pip install -r requirements.txt
+        env:
+          PY_COLORS: '1'
 
       - name: cache '.ansible/collections'
         id: cache-collections
@@ -30,9 +34,6 @@ jobs:
           path: /home/runner/.ansible
           key: zfs_dkms-runner-dot-ansible
 
-      - run: ansible-galaxy collection install -r meta/requirements.yml
-
       - run: ansible-lint
         env:
-          PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
