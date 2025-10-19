@@ -26,8 +26,6 @@ jobs:
           FORCE_COLOR: '1'
 
       - run: pip install --quiet --no-compile --requirement .github/workflows/requirements.txt
-        env:
-          FORCE_COLOR: '1'
 
       - name: cache '.ansible'
         id: cache-collections
