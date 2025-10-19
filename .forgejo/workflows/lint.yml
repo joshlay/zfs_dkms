@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4  # v5 needs nodejs 24+, f42 ships 22
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.13.9'
           cache: 'pip'
 
       - name: ansible/collections
