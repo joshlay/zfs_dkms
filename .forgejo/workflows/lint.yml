@@ -10,7 +10,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   test:
-    runs-on: ubuntu-22.04  # tag on runner maps to 'node:22-bookworm' image
+    runs-on: ubuntu-latest  # tag on runner maps to 'node:20-bookworm' image
     steps:
 
       - uses: actions/checkout@v4
