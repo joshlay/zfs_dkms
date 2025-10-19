@@ -24,7 +24,7 @@ None.
 
 ## Dependencies
 
-1. `community.general`
+1. `community.general`: `rhsm_repository`, `dnf_config_manager`, and `modprobe`
 
 ## License
 
