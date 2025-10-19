@@ -13,11 +13,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
 
-      - name: nodejs/git
-        run: |
-          apt-get update
-          apt-get --no-install-recommends --assume-yes install nodejs git ca-certificates lsb-release
-
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
