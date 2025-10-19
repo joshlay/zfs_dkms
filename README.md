@@ -4,7 +4,9 @@ zfs\_dkms
 Manages [ZFS on Linux](https://zfsonlinux.org/)
 for [Red Hat/derivatives](https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html),
 [Debian](https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/index.html),
-and [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html)
+and [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html).
+See [community.general.zpool](https://docs.ansible.com/ansible/latest/collections/community/general/zpool_module.html)
+for pool management.
 
 Requirements
 ------------
