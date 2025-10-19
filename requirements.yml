@@ -1,5 +1,5 @@
 ---
-# ansible-lint processes this file [when not given '--offline']
+# 'ansible-lint' processes this file in Action workflow [not given '--offline']
 collections:
   - community.general
 roles: []
