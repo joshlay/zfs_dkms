@@ -4,6 +4,7 @@
 # NOTE: limited EL8 testing/coverage, ansible-core 2.17+ lacks support for Python 3.6
 #                                  [managing Python releases considered out of scope]
 
+# Galaxy 'platforms' keyword is reportedly being phased out, dist. support noted in README: now assert
 - name: Assert Supported Distribution
   ansible.builtin.assert:
     that:
