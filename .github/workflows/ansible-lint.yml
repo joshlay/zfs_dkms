@@ -36,6 +36,6 @@ jobs:
           path: /home/runner/.ansible
           key: zfs_dkms-runner-dot-ansible
 
-      - run: ansible-lint
+      - run: ansible-lint  # no '--offline' implies 'ansible-galaxy collection install -r requirements.yml'
         env:
           ANSIBLE_FORCE_COLOR: '1'
