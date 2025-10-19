@@ -18,7 +18,7 @@ None.
 
 | Variable | Description | Role Default | Upstream Default |
 |----------|:------------|-------------:|-----------------:|
-| `zfs_dkms_arc_pct_min` | _Minimum_ physical memory (%) for ARC<br />_(Adaptive Read Cache)_. | `0` | `0` |
+| `zfs_dkms_arc_pct_min` | _Minimum_ physical memory (%) for ARC.<br />_(Adaptive Read Cache)_ | `0` | `0` |
 | `zfs_dkms_arc_pct_max` | _Peak_ physical memory (%) for ARC. | `16` | `0` |
 | `zfs_dkms_timeout` | Seconds to wait while rebooting `Fedora`, `RHEL`, or derivatives for kernel/header currency.<br />Skipped if the `zfs` kernel module is already loaded. | `3600` | _N/A_ |
 
