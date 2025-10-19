@@ -30,8 +30,8 @@ jobs:
         id: cache-collections
         uses: actions/cache@v4
         with:
-          path: .ansible/collections
-          key: ${{ runner.os }}-zfs_dkms-ansible-collections
+          path: /root/.ansible
+          key: zfs_dkms-dot-ansible
 
       - name: ansible/collections
         run: |
