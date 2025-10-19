@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.13t'
+          python-version: '3.14t'
           cache: 'pip'
         env:
           FORCE_COLOR: '1'
