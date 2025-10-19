@@ -1,1 +1,41 @@
-../../.forgejo/workflows/lint.yml
+---
+name: lint
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+  push:
+    branches:
+      - master
+    paths:
+      - '**/*.yml'
+  schedule:
+    - cron: "20 4 * * 0"
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04  # actually 'ghcr.io/catthehacker/ubuntu:runner-24.04', tagged on runner
+    steps:
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+        env:
+          FORCE_COLOR: '1'
+
+      - run: pip install -r requirements.txt
+        env:
+          FORCE_COLOR: '1'
+
+      - name: cache '.ansible/collections'
+        id: cache-collections
+        uses: actions/cache@v4
+        with:
+          path: /home/runner/.ansible
+          key: zfs_dkms-runner-dot-ansible
+
+      - run: ansible-lint
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
