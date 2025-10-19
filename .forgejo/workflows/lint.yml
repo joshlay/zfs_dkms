@@ -8,6 +8,7 @@ on:  # yamllint disable-line rule:truthy
       - master
   paths:
     - '**/*.yml'
+    - '.forgejo/workflows/*'  # ansible-lint gives a pass w/ yamllint
   schedule:
     - cron: "20 4 * * 0"
 
