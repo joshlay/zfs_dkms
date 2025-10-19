@@ -23,6 +23,7 @@ jobs:
         with:
           python-version: '3.13'
           cache: 'pip'
+          pip-install: 'ansible-core ansible-lint'
 
       - name: cache '.ansible/collections'
         id: cache-collections
@@ -31,10 +32,7 @@ jobs:
           path: /root/.ansible
           key: zfs_dkms-dot-ansible
 
-      - name: ansible+collections
-        run: |
-          pip install --no-compile ansible-core ansible-lint
-          ansible-galaxy collection install -r meta/requirements.yml
+      - run: ansible-galaxy collection install -r meta/requirements.yml
 
       - run: ansible-lint
         env:
