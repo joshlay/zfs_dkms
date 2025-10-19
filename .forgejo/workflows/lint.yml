@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.13'
           cache: 'pip'
-          pip-install: -r requirements.txt
+      - run: pip install -r requirements.txt
 
       - name: cache '.ansible/collections'
         id: cache-collections
