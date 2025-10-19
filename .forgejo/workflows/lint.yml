@@ -1,0 +1,35 @@
+name: ci-lint
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "20 4 * * 0"
+
+jobs:
+  test:
+    runs-on: docker
+    container:
+      image: fedora:42  # lock to *latest stable*; rawhide/next is 'latest' tag
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install packages and ansible
+        run: |
+          echo -e 'max_parallel_downloads=20\ndeltarpm=False\nfastestmirror=False' | tee -a /etc/dnf/dnf.conf
+          dnf -yq install nodejs git pipx
+          pipx install ansible-core ansible-lint
+          ansible-galaxy collection install -r meta/requirements.yml
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+
+      - name: Lint
+        run: ansible-lint
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
