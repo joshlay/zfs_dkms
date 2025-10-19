@@ -29,7 +29,7 @@ jobs:
         env:
           FORCE_COLOR: '1'
 
-      - name: cache '.ansible/collections'
+      - name: cache '.ansible'
         id: cache-collections
         uses: actions/cache@v4
         with:
