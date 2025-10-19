@@ -10,13 +10,19 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # tag on runner maps to 'node:20-bookworm' image
+    runs-on: docker
+    container:
+      image: fedora:42  # lock to *latest stable*; rawhide/next is 'latest' tag
     steps:
+
+    - name: Requirements
+      run: |
+        echo -e 'max_parallel_downloads=20\ndeltarpm=False\nfastestmirror=False' | tee -a /etc/dnf/dnf.conf
+        dnf -yq in nodejs git-core python3-pip
 
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v6
         with:
-          python-version: 3.13
           cache: 'pip'
 
       - name: ansible/collections
