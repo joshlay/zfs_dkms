@@ -1,10 +1,10 @@
 zfs\_dkms
 =========
 
-Manages [ZFS](https://zfsonlinux.org/)
-for [Red Hat/derivatives](https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html),
+Ansible Role for installing [ZFS](https://zfsonlinux.org/)
+on [Red Hat/derivatives](https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html),
 [Debian](https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/index.html),
-and [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html).
+or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html).
 For pools/volumes, see:
 
 1. [community.general.zpool](https://docs.ansible.com/ansible/latest/collections/community/general/zpool_module.html)
