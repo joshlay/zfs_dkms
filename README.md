@@ -23,7 +23,7 @@ Role Variables
 |----------|:-----------:|--------:|--------:|
 | `zfs_dkms_arc_pct_min` | _Minimum_ physical memory (%) for ARC usage | `0` | `0` |
 | `zfs_dkms_arc_pct_max` | _Peak_ physical memory (%) for ARC usage | `16` | `0` |
-| `zfs_dkms_timeout` | Seconds to wait while rebooting `Fedora`, `RHEL`, or derivatives. Skipped when ZFS is loaded.<br />_[for kernel update and current headers]_ | `3600` | _N/A_ |
+| `zfs_dkms_timeout` | Seconds to wait while rebooting `Fedora`, `RHEL`, or derivatives.<br />_[for kernel update and current headers]_<br />Skipped if the `zfs` kernel module is already loaded. | `3600` | _N/A_ |
 
 Dependencies
 ------------
