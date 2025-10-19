@@ -13,16 +13,18 @@ argument_specs:
         required: false
         default: 3600
         description:
-          - "How long to wait when rebooting RHEL/derivatives for kernel updates [and current headers]"
+          - "Seconds to wait while rebooting Fedora, RHEL, or derivatives for kernel/header currency."
+          - "Not applicable to Debian or Ubuntu."
+          - "Skipped when zfs is already loaded."
       zfs_dkms_arc_pct_min:
         type: "int"
         required: false
         default: 0
         description:
-          - "Minimum physical memory (%) allowed for ARC usage"
+          - "Minimum physical memory (%) for ARC (Adaptive Read Cache)."
       zfs_dkms_arc_pct_max:
         type: "int"
         required: false
         default: 16
         description:
-          - "Max physical memory (%) allowed for ARC usage"
+          - "Peak physical memory (%) for ARC."
