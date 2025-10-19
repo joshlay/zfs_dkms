@@ -1,6 +1,6 @@
 # zfs\_dkms
 
-Ansible Role for installing [ZFS](https://zfsonlinux.org/)
+Ansible Role for the [ZFS](https://zfsonlinux.org/) kernel module
 on [Fedora](https://openzfs.github.io/openzfs-docs/Getting%20Started/Fedora/index.html),
 [Red Hat](https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html)/derivatives,
 [Debian](https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/index.html),
