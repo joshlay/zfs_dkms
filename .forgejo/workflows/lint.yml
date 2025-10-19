@@ -10,7 +10,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04  # actually 'ghcr.io/catthehacker/ubuntu:runner-24.04', tagged on runner
     steps:
 
       - uses: actions/checkout@v5
