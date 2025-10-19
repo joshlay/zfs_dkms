@@ -1,1 +1,2 @@
 ansible-lint
+ansible-core==2.20.0rc1
