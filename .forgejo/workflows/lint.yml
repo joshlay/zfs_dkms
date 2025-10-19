@@ -25,7 +25,7 @@ jobs:
 
       - run: pip install -r requirements.txt
         env:
-          PY_COLORS: '1'
+          FORCE_COLOR: '1'
 
       - name: cache '.ansible/collections'
         id: cache-collections
