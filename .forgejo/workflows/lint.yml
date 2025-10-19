@@ -6,9 +6,8 @@ on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master
-  paths:
-    - '**/*.yml'
-    - '.forgejo/workflows/*'  # ansible-lint gives a pass w/ yamllint
+    paths:
+      - '**/*.yml'
   schedule:
     - cron: "20 4 * * 0"
 
