@@ -24,8 +24,8 @@ jobs:
         id: cache-collections
         uses: actions/cache@v4
         with:
-          path: /root/.ansible
-          key: runner-zfs_dkms-dot-ansible
+          path: /home/runner/.ansible
+          key: zfs_dkms-runner-dot-ansible
 
       - run: ansible-galaxy collection install -r meta/requirements.yml
 
