@@ -31,7 +31,7 @@ jobs:
 
       - name: ansible+collections
         run: |
-          pip install --no-compile ansible-core ansible-lint
+          pip install --no-compile --no-deps ansible-core ansible-lint
           ansible-galaxy collection install -r meta/requirements.yml
 
       - run: ansible-lint
