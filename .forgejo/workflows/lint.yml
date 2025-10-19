@@ -15,6 +15,7 @@ jobs:
 
       - name: nodejs/git
         run: |
+          apt-get update
           apt-get --no-install-recommends install nodejs git 
 
       - uses: actions/checkout@v4
