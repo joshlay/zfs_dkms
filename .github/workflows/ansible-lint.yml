@@ -25,7 +25,7 @@ jobs:
         env:
           FORCE_COLOR: '1'
 
-      - run: pip install -r .github/workflows/requirements.txt
+      - run: pip install --quiet --requirement .github/workflows/requirements.txt
         env:
           FORCE_COLOR: '1'
 
