@@ -29,7 +29,8 @@ None.
 ## Example Playbook
 
 ```yaml
-- hosts: servers
+- name: ZFS
+  hosts: servers
   roles:
      - { role: zfs_dkms }
 ```
