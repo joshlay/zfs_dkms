@@ -4,6 +4,13 @@
 # NOTE: limited EL8 testing/coverage, ansible-core 2.17+ lacks support for Python 3.6
 #                                  [managing Python releases considered out of scope]
 
+- name: Assert Supported Distribution
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family in ['Debian', 'RedHat']  # + several derivatives
+    fail_msg: "OS Family '{{ ansible_os_family }}' not supported, expected Debian/RedHat."
+    success_msg: "Supported OS Family ({{ ansible_os_family }})"
+
 - name: Package Facts
   ansible.builtin.package_facts: { manager: auto }
 
