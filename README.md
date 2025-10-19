@@ -2,7 +2,7 @@ zfs\_dkms
 =========
 
 Ansible Role for installing [ZFS](https://zfsonlinux.org/)
-on [Fedora](https://openzfs.github.io/openzfs-docs/Getting%20Started/Fedora/index.html#installation),
+on [Fedora](https://openzfs.github.io/openzfs-docs/Getting%20Started/Fedora/index.html),
 [Red Hat](https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html)/derivatives,
 [Debian](https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/index.html),
 or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html).
