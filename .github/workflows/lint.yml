@@ -9,7 +9,7 @@ on:  # yamllint disable-line rule:truthy
     paths:
       - '**/*.yml'
   schedule:
-    - cron: "20 4 * * 0"
+    - cron: "0 0 * * 0"  # weekly, test against potentially-new ansible
 
 jobs:
   test:
