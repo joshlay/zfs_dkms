@@ -28,4 +28,4 @@ None.
 
 ## License
 
-MIT
+[MIT](./LICENSE)
