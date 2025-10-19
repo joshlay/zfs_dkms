@@ -26,15 +26,6 @@ None.
 
 1. `community.general`
 
-## Example Playbook
-
-```yaml
-- name: ZFS
-  hosts: servers
-  roles:
-     - { role: zfs_dkms }
-```
-
 ## License
 
 MIT
