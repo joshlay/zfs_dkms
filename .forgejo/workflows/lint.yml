@@ -15,6 +15,13 @@ jobs:
       image: fedora:42  # lock to *latest stable*; rawhide/next is 'latest' tag
     steps:
 
+      - name: cache '/var/cache/dnf'
+        id: cache-dnf
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/dnf
+          key: zfs_dkms-dnf
+
       - name: requirements
         run: |
           echo -e 'max_parallel_downloads=20\ndeltarpm=False\nfastestmirror=False' | tee -a /etc/dnf/dnf.conf
