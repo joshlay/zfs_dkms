@@ -12,8 +12,6 @@ For pools/volumes, see:
 
 ## Requirements
 
-None.
-
 ## Role Variables
 
 | Variable | Description | Role Default | Upstream Default |
