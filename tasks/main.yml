@@ -79,7 +79,7 @@
     disable_gpg_check: "{{ true if ansible_os_family == 'RedHat' else omit }}"  # signature+repo is installed from URL [with SSL/TLS]
   become: true
 
-- name: Remove conflicting 'zfs-fuse'  # most likely to appear w/ Fedora, requirement satisfied by real ZFS; placed before immediately install
+- name: Remove conflicting 'zfs-fuse'  # most likely to appear w/ Fedora, requirement satisfied by real ZFS [installed next]
   ansible.builtin.command: rpm -e --nodeps zfs-fuse  # noqa: command-instead-of-module (lack coverage)
   when: "'zfs-fuse' in ansible_facts.packages"
   changed_when: true  # lint: assume on return, 'when' checks requirement
