@@ -18,12 +18,12 @@ jobs:
           apt-get update
           apt-get --no-install-recommends --assume-yes install nodejs git ca-certificates lsb-release
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
           cache: 'pip'
-          pip-install: '-r requirements.txt'
+          pip-install: -r requirements.txt
 
       - name: cache '.ansible/collections'
         id: cache-collections
