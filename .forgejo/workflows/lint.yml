@@ -22,11 +22,6 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          cache: 'pip'
-          pip-install: ansible-core ansible-lint
-
       - name: cache '.ansible/collections'
         id: cache-collections
         uses: actions/cache@v4
@@ -34,8 +29,9 @@ jobs:
           path: /root/.ansible
           key: zfs_dkms-dot-ansible
 
-      - name: ansible collections
+      - name: ansible+collections
         run: |
+          pip install --no-compile ansible-core ansible-lint
           ansible-galaxy collection install -r meta/requirements.yml
 
       - name: ansible-lint
