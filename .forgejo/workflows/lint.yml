@@ -18,9 +18,9 @@ jobs:
       - name: requirements
         run: |
           echo -e 'max_parallel_downloads=20\ndeltarpm=False\nfastestmirror=False' | tee -a /etc/dnf/dnf.conf
-          dnf -yq --no-docs in nodejs24 git-core python3-pip
+          dnf -yq --no-docs in nodejs git-core python3-pip
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v6
         with:
