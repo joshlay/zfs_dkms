@@ -29,9 +29,6 @@ jobs:
         run: |
           pip install ansible-core ansible-lint
           ansible-galaxy collection install -r meta/requirements.yml
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
 
       - name: ansible-lint
         run: |
