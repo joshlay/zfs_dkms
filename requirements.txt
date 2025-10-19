@@ -1,2 +1,2 @@
 ansible-lint
-ansible-core==2.20.0rc1  # python3.14 freethreading support requires 2.20+ (currently, RC)
+ansible-core
