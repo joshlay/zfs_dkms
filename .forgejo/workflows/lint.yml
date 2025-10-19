@@ -10,18 +10,10 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   test:
-    runs-on: lts
-    # runs-on: docker
-    # container:
-    #  image: fedora:42  # lock to *latest stable*; rawhide/next is 'latest' tag
+    runs-on: ubuntu-latest  # tag on runner maps to 'node:25-trixie' image
     steps:
 
-    #  - name: Action Requirements
-    #    run: |
-    #      echo -e 'max_parallel_downloads=20\ndeltarpm=False\nfastestmirror=False' | tee -a /etc/dnf/dnf.conf
-    #      dnf -yq install nodejs git pipx
-
-      - uses: actions/checkout@v4  # v5 needs nodejs 24+, f42 ships 22
+      - uses: actions/checkout@v5  # v5 needs nodejs 24+
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13.9'
