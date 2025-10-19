@@ -35,6 +35,7 @@ jobs:
       - name: ansible-lint
         shell: bash
         run: |
+          cat $FORGEJO_PATH
           echo /root/.local/bin >> $FORGEJO_PATH
           ansible-lint
         env:
