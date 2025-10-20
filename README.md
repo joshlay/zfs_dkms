@@ -47,7 +47,8 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
 ```
 
 _NOTE:_ It is _not_ recommended to inline `zfs_mirror_disks` like this example.
-Values are expected to be unique among hosts _[or groups]_. Use the
+Values are expected to be unique among hosts _[or groups]_.  
+Use the
 [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#assigning-a-variable-to-one-machine-host-variables)
 or [host/group](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#organizing-host-and-group-variables)
 vars instead.
