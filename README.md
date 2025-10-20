@@ -16,7 +16,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
 
 ## Dependencies
 
-1. `community.general`: `rhsm_repository`, `dnf_config_manager`, and `modprobe`
+1. `community.general`: use modules `rhsm_repository`, `dnf_config_manager`, and `modprobe`
 
 ## Example Playbook
 
