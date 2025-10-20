@@ -33,7 +33,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
       vars:
         zfs_dkms_arc_pct_max: 33
   tasks:
-    - name: Pool (mirror, 'rust')  # see also: 'community.general.zfs'
+    - name: "Pool (mirror, 'rust')"  # see also: 'community.general.zfs'
       when: zfs_mirror_disks is defined
       community.general.zpool:
         name: rust
@@ -44,6 +44,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
         vdevs:
           - type: mirror
             disks: "{{ zfs_mirror_disks }}"  # reminder: 'host_vars'/inventory, host-specific
+      become: true
 ```
 
 _NOTE:_ It is _not_ recommended to inline `zfs_mirror_disks` like this example.
