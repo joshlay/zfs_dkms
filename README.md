@@ -23,13 +23,18 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
 ```yaml
 ---
 - name: ZFS + Pool
-  hosts: exporter  # group in inventory
+  hosts: all
+  vars:
+    zfs_mirror_disks:  # example only, host-specific (inventory/'host_vars' instead)
+      - /dev/disk/by-id/ata-WDC_WD120EFBX-ABCDEFG_12345678
+      - /dev/disk/by-id/ata-WDC_WD120EFBX-HIJKLMN_87654321
   roles:
     - name: zfs_dkms
       vars:
         zfs_dkms_arc_pct_max: 33
   tasks:
-    - name: Pool ('rust', mirror)
+    - name: Pool (mirror, 'rust')
+      when: zfs_mirror_disks is defined
       community.general.zpool:  # see also: community.general.zfs
         name: rust
         pool_properties:
@@ -38,9 +43,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
           compression: lz4
         vdevs:
           - type: mirror
-            disks:
-              - /dev/disk/by-id/ata-WDC_WD120EFBX-ABCDEFG_12345678
-              - /dev/disk/by-id/ata-WDC_WD120EFBX-HIJKLMN_87654321
+            disks: "{{ zfs_mirror_disks }}"  # reminder: 'host_vars'/inventory, host-specific
 ```
 
 ## License
