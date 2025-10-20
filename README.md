@@ -29,7 +29,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
       - /dev/disk/by-id/ata-WDC_WD120EFBX-ABCDEFG_12345678
       - /dev/disk/by-id/ata-WDC_WD120EFBX-HIJKLMN_87654321
   roles:
-    - name: zfs_dkms
+    - name: zfs_dkms  # this role, installs/builds ZFS
       vars:
         zfs_dkms_arc_pct_max: 33
   tasks:
