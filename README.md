@@ -43,11 +43,11 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
           compression: lz4
         vdevs:
           - type: mirror
-            disks: "{{ zfs_mirror_disks }}"  # reminder: 'host_vars'/inventory, host-specific
+            disks: "{{ zfs_mirror_disks }}"  # reminder: see NOTE below
       become: true
 ```
 
-_NOTE:_ It is _not_ recommended to inline `zfs_mirror_disks`, `zfs_dkms_arc_pct_max`, or other _pool/filesystem properties_.
+_NOTE:_ _Not_ recommended to inline `zfs_mirror_disks`, `zfs_dkms_arc_pct_max`, or _pool/filesystem properties_.
 Values are expected to be unique among hosts _[or groups]_.  
 Use the
 [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#assigning-a-variable-to-one-machine-host-variables)
