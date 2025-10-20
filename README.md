@@ -10,8 +10,6 @@ For pools/volumes, see:
 1. [community.general.zpool](https://docs.ansible.com/ansible/latest/collections/community/general/zpool_module.html)
 2. [community.general.zfs](https://docs.ansible.com/ansible/latest/collections/community/general/zfs_module.html)
 
-## Requirements
-
 ## Role Variables
 
 | Variable | Description | Role Default | Upstream Default |
