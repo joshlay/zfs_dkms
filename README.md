@@ -33,9 +33,9 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
       vars:
         zfs_dkms_arc_pct_max: 33
   tasks:
-    - name: Pool (mirror, 'rust')
+    - name: Pool (mirror, 'rust')  # see also: 'community.general.zfs'
       when: zfs_mirror_disks is defined
-      community.general.zpool:  # see also: community.general.zfs
+      community.general.zpool:
         name: rust
         pool_properties:
           ashift: 12
