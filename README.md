@@ -5,10 +5,6 @@ Ansible Role for [ZFS](https://zfsonlinux.org/) on
 [Red Hat](https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html)/derivatives,
 [Debian](https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/index.html),
 or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html).
-For pools/volumes, see:
-
-1. [community.general.zpool](https://docs.ansible.com/ansible/latest/collections/community/general/zpool_module.html)
-2. [community.general.zfs](https://docs.ansible.com/ansible/latest/collections/community/general/zfs_module.html)
 
 ## Role Variables
 
@@ -34,7 +30,7 @@ For pools/volumes, see:
         zfs_dkms_arc_pct_max: 33
   tasks:
     - name: Pool ('rust', mirror)
-      community.general.zpool:
+      community.general.zpool:  # see also: community.general.zfs
         name: rust
         pool_properties:
           ashift: 12
