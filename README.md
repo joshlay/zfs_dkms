@@ -22,6 +22,31 @@ For pools/volumes, see:
 
 1. `community.general`: `rhsm_repository`, `dnf_config_manager`, and `modprobe`
 
+## Example Playbook
+
+```yaml
+---
+- name: ZFS + Pool
+  hosts: exporter  # group in inventory
+  roles:
+    - name: zfs_dkms
+      vars:
+        zfs_dkms_arc_pct_max: 33
+  tasks:
+    - name: Pool ('rust', mirror)
+      community.general.zpool:
+        name: rust
+        pool_properties:
+          ashift: 12
+        filesystem_properties:
+          compression: lz4
+        vdevs:
+          - type: mirror
+            disks:
+              - /dev/disk/by-id/ata-WDC_WD120EFBX-ABCDEFG_12345678
+              - /dev/disk/by-id/ata-WDC_WD120EFBX-HIJKLMN_87654321
+```
+
 ## License
 
 [MIT](./LICENSE)
