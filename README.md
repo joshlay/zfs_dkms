@@ -47,7 +47,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
       become: true
 ```
 
-_NOTE:_ _Not_ recommended to inline `zfs_mirror_disks`, `zfs_dkms_arc_pct_max`, or _pool/filesystem properties_.
+_NOTE:_ **Not** recommended to inline `zfs_mirror_disks`, `zfs_dkms_arc_pct_max`, or _pool/filesystem properties_.
 Values are expected to be unique among hosts _[or groups]_.  
 Use the
 [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#assigning-a-variable-to-one-machine-host-variables)
