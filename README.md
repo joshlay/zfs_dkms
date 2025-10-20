@@ -25,7 +25,7 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
 - name: ZFS + Pool
   hosts: all
   vars:
-    zfs_mirror_disks:  # example only, host-specific (inventory/'host_vars' instead)
+    zfs_mirror_disks:  # see NOTE below
       - /dev/disk/by-id/ata-WDC_WD120EFBX-ABCDEFG_12345678
       - /dev/disk/by-id/ata-WDC_WD120EFBX-HIJKLMN_87654321
   roles:
@@ -45,6 +45,13 @@ or [Ubuntu](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/inde
           - type: mirror
             disks: "{{ zfs_mirror_disks }}"  # reminder: 'host_vars'/inventory, host-specific
 ```
+
+_NOTE:_ It is _not_ recommended to inline `zfs_mirror_disks` like this example.
+
+Values are bound to be unique among hosts _[or groups]_. Define this in the
+[inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#assigning-a-variable-to-one-machine-host-variables)
+or [host/group](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#organizing-host-and-group-variables)
+vars instead.
 
 ## License
 
