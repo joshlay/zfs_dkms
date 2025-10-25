@@ -58,7 +58,10 @@ instead.
 
 ### Package not found (Fedora)
 
-DNF may fail to find the relevant packages _on Fedora_ when the kernel is not supported by _ZFS._ Previously-installed kernels, or LTS _[from third-parties/COPR]_ may be advisable until the latest _'stable'_ is supported.
+DNF may fail to find packages _on Fedora_ when the kernel is not supported
+by _ZFS._ Previously-installed kernels, or LTS _[from
+third-parties/[COPR](https://copr.fedorainfracloud.org/)]_, may be advisable
+until the latest _'stable'_ is supported.
 
 ## License
 
