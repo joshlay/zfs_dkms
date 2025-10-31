@@ -1,0 +1,18 @@
+---
+extends: default
+
+# only really wanted 'line-length: disable'. rest of this restores 'fix mode'/addresses:
+# "WARNING  Found incompatible custom yamllint configuration (.yamllint), please either remove the file or edit it to comply"
+
+rules:
+  line-length: disable
+  braces:
+    max-spaces-inside: 1
+  comments-indentation: false
+  comments:
+    min-spaces-from-content: 1
+  octal-values:
+    forbid-implicit-octal: true
+
+ignore: |
+  .git
